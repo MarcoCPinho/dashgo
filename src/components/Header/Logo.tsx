@@ -7,7 +7,7 @@ const Logo = () => (
     letterSpacing="tight"
     w="64"
   >
-    dashogo
+    dashgo
     <Text as="span" marginLeft="1" color="pink.500">
       .
     </Text>
