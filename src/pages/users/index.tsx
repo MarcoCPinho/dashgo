@@ -35,7 +35,7 @@ const UserList = () => {
     lg: true,
   });
 
-  async function handlePrefetchUser(userId: number) {
+  async function handlePrefetchUser(userId: string) {
     await queryclient.prefetchQuery(
       ["user", userId],
       async () => {
