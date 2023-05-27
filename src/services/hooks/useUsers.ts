@@ -1,4 +1,4 @@
-import { useQuery } from "react-query";
+import { UseQueryOptions, useQuery } from "react-query";
 import { api } from "../api";
 
 type User = {
@@ -34,9 +34,10 @@ const getUsers = async (page: number): Promise<GetUsersResponse> => {
   return { users, totalCount };
 };
 
-const useUsers = (page: number) => {
+const useUsers = (page: number, options: UseQueryOptions) => {
   return useQuery(["users", page], () => getUsers(page), {
     staleTime: 1000 * 60 * 10, //10 minutos ainda é "fresh"... ou seja, não fará nova requisição caso o usuário venha e volte
+    ...options,
   });
 };
 

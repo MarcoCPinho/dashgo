@@ -23,12 +23,15 @@ import Header from "../../components/Header";
 import Pagination from "../../components/Pagination";
 import Sidebar from "../../components/Sidebar";
 import { api } from "../../services/api";
-import { useUsers } from "../../services/hooks/useUsers";
+import { getUsers, useUsers } from "../../services/hooks/useUsers";
 import { queryclient } from "../../services/queryClient";
+import { GetServerSideProps } from "next";
 
-const UserList = () => {
+const UserList = ({ users }) => {
   const [page, setPage] = useState(1);
-  const { data, isLoading, error, isFetching } = useUsers(page);
+  const { data, isLoading, error, isFetching } = useUsers(page, {
+    initialData: users,
+  });
 
   const isWideVersion = useBreakpointValue({
     base: false,
@@ -154,3 +157,11 @@ const UserList = () => {
 };
 
 export default UserList;
+
+export const getServerProps: GetServerSideProps = async () => {
+  const { users, totalCount } = await getUsers(1);
+
+  return {
+    props: { users },
+  };
+};
